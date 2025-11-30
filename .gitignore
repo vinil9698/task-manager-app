@@ -56,3 +56,5 @@ yarn-error.log*
 # Cache folders
 .cache/
 .tmp/
+# vercel
+.vercel

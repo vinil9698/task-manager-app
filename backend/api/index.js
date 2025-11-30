@@ -12,10 +12,10 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
-app.use('/api/todos', routes);
+app.use('/todos', routes);
 
 // Optional: health check
-app.get('/api/health', (req, res) => {
+app.get('/health', (req, res) => {
   res.json({ status: 'Serverless API running' });
 });
 
