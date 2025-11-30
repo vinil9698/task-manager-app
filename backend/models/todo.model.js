@@ -8,7 +8,7 @@ import sequelize from "../config/db.js";
   based on this structure when sequelize.sync() runs.
 */
 
-const TodoModel = sequelize.define("Todo", {
+const Todo = sequelize.define("Todo", {
     // Primary key – unique ID for each todo item
     id: {
         type: DataTypes.INTEGER,
@@ -30,4 +30,4 @@ const TodoModel = sequelize.define("Todo", {
     }
 });
 
-export default TodoModel;
+export default Todo;

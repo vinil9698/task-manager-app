@@ -1,4 +1,4 @@
-import TodoModel from "../models/todo.model.js";
+import Todo from "../models/todo.model.js";
 
 /*
   Get all todos
@@ -6,7 +6,7 @@ import TodoModel from "../models/todo.model.js";
 */
 const getTodos = async (req, res) => {
   try {
-    const todos = await TodoModel.findAll();
+    const todos = await Todo.findAll();
     res.json(todos);
   } catch (error) {
     res.status(500).json({
@@ -24,7 +24,7 @@ const createTodo = async (req, res) => {
     const { title } = req.body;
 
     // Check if a todo with the same title already exists
-    const existingTodo = await TodoModel.findOne({ where: { title } });
+    const existingTodo = await Todo.findOne({ where: { title } });
 
     if (existingTodo) {
       return res.status(400).json({
@@ -54,7 +54,7 @@ const updateTodo = async (req, res) => {
     const { id } = req.params;
 
     // Update the todo item
-    const [updatedRows] = await TodoModel.update(req.body, { where: { id } });
+    const [updatedRows] = await Todo.update(req.body, { where: { id } });
 
     if (updatedRows === 0) {
       // No rows updated → todo not found
@@ -79,7 +79,7 @@ const deleteTodo = async (req, res) => {
     const { id } = req.params;
 
     // Delete the todo item
-    const deletedRows = await TodoModel.destroy({ where: { id } });
+  const deletedRows = await Todo.destroy({ where: { id } });
 
     if (deletedRows === 0) {
       // No rows deleted → todo not found
