@@ -1,0 +1,60 @@
+# ============================
+# Global
+# ============================
+# OS files
+.DS_Store
+Thumbs.db
+# Environment files
+.env
+.env.*
+# ============================
+# Angular Frontend
+# ============================
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/cache/
+# Angular environment files (optional—if sensitive values exist)
+frontend/src/environments/environment.prod.ts
+frontend/src/environments/environment.ts
+# ============================
+# Node.js Backend
+# ============================
+backend/node_modules/
+backend/logs/
+backend/debug.log
+backend/npm-debug.log
+backend/yarn-debug.log
+backend/yarn-error.log
+# PM2 logs (if used)
+backend/.pm2/
+# Build outputs
+backend/dist/
+backend/build/
+# ============================
+# IDE folders
+# ============================
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+# ============================
+# Database files (local)
+# ============================
+*.sql
+*.sqlite
+*.db
+# If you're using Sequelize/Migrations:
+migrations/.temp/
+# ============================
+# Misc
+# ============================
+# Logs
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+# Cache folders
+.cache/
+.tmp/

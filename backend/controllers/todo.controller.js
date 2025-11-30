@@ -1,0 +1,107 @@
+import TodoModel from "../models/todo.model.js";
+
+/*
+  Get all todos
+  Fetches every record from the Todo table and returns them as a JSON response.
+*/
+const getTodos = async (req, res) => {
+  try {
+    const todos = await TodoModel.findAll();
+    res.json(todos);
+  } catch (error) {
+    res.status(500).json({
+      error: error.message
+    });
+  }
+};
+
+/*
+  Create a new todo
+  Takes request body data and inserts a new todo record into the database.
+*/
+const createTodo = async (req, res) => {
+  try {
+    const { title } = req.body;
+
+    // Check if a todo with the same title already exists
+    const existingTodo = await TodoModel.findOne({ where: { title } });
+
+    if (existingTodo) {
+      return res.status(400).json({
+        error: `Todo with title ${title} already exists`,
+      });
+    }
+
+    // Create new todo if not exists
+    await TodoModel.create(req.body);
+    res.status(201).json({
+      success: "Todo created successfully"
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      error: error.message
+    });
+  }
+};
+
+/*
+  Update an existing todo
+  Finds a todo by its ID and updates its values based on the request body.
+*/
+const updateTodo = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Update the todo item
+    const [updatedRows] = await TodoModel.update(req.body, { where: { id } });
+
+    if (updatedRows === 0) {
+      // No rows updated → todo not found
+      return res.status(404).json({ error: `Todo with id ${id} not found` });
+    }
+
+    res.json({ success: 'Todo updated successfully' });
+  } catch (error) {
+    res.status(500).json({
+      error: error.message
+    });
+  }
+};
+
+
+/*
+  Delete a todo
+  Removes a todo record from the database based on the ID provided in the URL params.
+*/
+const deleteTodo = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Delete the todo item
+    const deletedRows = await TodoModel.destroy({ where: { id } });
+
+    if (deletedRows === 0) {
+      // No rows deleted → todo not found
+      return res.status(404).json({ error: `Todo with id ${id} not found` });
+    }
+
+    res.json({ success: 'Todo deleted successfully' });
+  } catch (error) {
+    res.status(500).json({
+      error: error.message
+    });
+  }
+};
+
+
+/*
+  Export all controller methods
+  Allows importing these functions as a grouped object.
+*/
+export default {
+    getTodos,
+    createTodo,
+    updateTodo,
+    deleteTodo
+};
