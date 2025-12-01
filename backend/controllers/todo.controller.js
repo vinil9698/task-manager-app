@@ -33,7 +33,7 @@ const createTodo = async (req, res) => {
     }
 
     // Create new todo if not exists
-    await TodoModel.create(req.body);
+    await Todo.create(req.body);
     res.status(201).json({
       success: "Todo created successfully"
     });
