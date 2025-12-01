@@ -1,5 +1,5 @@
-import { DataTypes } from "sequelize";
-import sequelize from "../config/db.js";
+const { DataTypes } = require("sequelize");
+const sequelize = require("../config/db");
 
 /*
   Todo Model Definition
@@ -30,4 +30,4 @@ const Todo = sequelize.define("Todo", {
     }
 });
 
-export default Todo;
+module.exports = Todo;

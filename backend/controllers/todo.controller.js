@@ -1,4 +1,4 @@
-import Todo from "../models/todo.model.js";
+const Todo = require('../models/todo.model.js')
 
 /*
   Get all todos
@@ -57,7 +57,6 @@ const updateTodo = async (req, res) => {
     const [updatedRows] = await Todo.update(req.body, { where: { id } });
 
     if (updatedRows === 0) {
-      // No rows updated → todo not found
       return res.status(404).json({ error: `Todo with id ${id} not found` });
     }
 
@@ -69,7 +68,6 @@ const updateTodo = async (req, res) => {
   }
 };
 
-
 /*
   Delete a todo
   Removes a todo record from the database based on the ID provided in the URL params.
@@ -78,11 +76,9 @@ const deleteTodo = async (req, res) => {
   try {
     const { id } = req.params;
 
-    // Delete the todo item
-  const deletedRows = await Todo.destroy({ where: { id } });
+    const deletedRows = await Todo.destroy({ where: { id } });
 
     if (deletedRows === 0) {
-      // No rows deleted → todo not found
       return res.status(404).json({ error: `Todo with id ${id} not found` });
     }
 
@@ -94,14 +90,12 @@ const deleteTodo = async (req, res) => {
   }
 };
 
-
 /*
   Export all controller methods
-  Allows importing these functions as a grouped object.
 */
-export default {
-    getTodos,
-    createTodo,
-    updateTodo,
-    deleteTodo
+module.exports = {
+  getTodos,
+  createTodo,
+  updateTodo,
+  deleteTodo
 };

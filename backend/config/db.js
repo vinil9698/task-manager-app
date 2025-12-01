@@ -1,4 +1,4 @@
-import Sequelize from 'sequelize';
+const Sequelize = require('sequelize');
 
 /*
   Database Connection Setup
@@ -21,4 +21,4 @@ const sequelize = new Sequelize(
     }
 );
 
-export default sequelize;
+module.exports = sequelize;

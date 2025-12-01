@@ -1,11 +1,10 @@
 // Load environment variables (PORT, DB credentials, etc.)
-import dotenv from 'dotenv';
-dotenv.config();
+require('dotenv').config();
 
-import express from 'express';
-import cors from 'cors';
-import todoRoutes from './routes/todo.routes.js';
-import sequelize from './config/db.js';
+const express = require('express');
+const cors = require('cors');
+const todoRoutes = require('./routes/todo.routes');
+const sequelize = require('./config/db')
 
 const app = express();
 
@@ -15,7 +14,7 @@ app.use(cors());
 // Parse incoming JSON request bodies
 app.use(express.json());
 
-// Register all Todo API routes under /api/todo
+// Register all Todo API routes under /api/todos
 app.use('/api/todos', todoRoutes);
 
 // Sync Sequelize models with the database, then start server
@@ -26,9 +25,7 @@ sequelize.sync()
                 console.log(`Server connection error: ${err}`);
                 return;
             }
-            console.log(
-                `Server connected successfully and running on port ${process.env.PORT}`
-            );
+            console.log(`Server connected successfully and running on port ${process.env.PORT}`);
         });
     })
     .catch((err) => console.log(`Sequelize sync failed: ${err}`));
